@@ -176,7 +176,10 @@ class Sim:
                 el.state_change(ElevatorState.Moving)
                 if inst.floor < 0 or inst.floor >= len(self.floors):
                     display.fatal_error(f"Floor {inst.floor} not found.")
-                el.heading = 1 if inst.floor > el.floor else -1
+                if inst.floor > el.floor:
+                    el.heading = 1
+                elif inst.floor < el.floor:
+                    el.heading = -1
 
         if el.state == ElevatorState.Moving:
 
